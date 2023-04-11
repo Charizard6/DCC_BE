@@ -11,11 +11,11 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.get("/getPostData", async (req: Request, res: Response) => {
-    let postType: string = "cities";
-    let postID: string = "Busan3";
+    let postType: string = "Users";
+    let postID: string = "육영현";
     let resultData: object = await FB.getFBPostData(postType, postID);
     
-    console.log(resultData);
+    res.send(resultData);
 });
 
 app.get("/putDB", async (req: Request, res: Response) => {

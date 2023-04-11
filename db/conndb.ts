@@ -16,22 +16,22 @@ const db = getFirestore(app);
 
 export const getFBPostData =async (collect : string, documen: string) => {
     let resultData ={
-        Country_1:"",
+        email:"",
         name: "",
-        state: ""
+        index: ""
     };
     try{
         const postDocData = await getDoc(doc(db, collect, documen));
         if(postDocData.exists()){
-            resultData.Country_1 = postDocData.data().country;
+            resultData.index = postDocData.data().index;
             resultData.name = postDocData.data().name;
-            resultData.state = postDocData.data().state;
+            resultData.email = postDocData.data().email;
         }else{
-            resultData.Country_1 = "없어요";
+            resultData.index = "없어요";
             resultData.name = "없어요";
         }
     }catch(error){
-        resultData.Country_1 = "캣치문";
+        resultData.index = "캣치문";
         resultData.name = "캐치문";
     }
     return resultData;

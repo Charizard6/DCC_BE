@@ -45,10 +45,10 @@ app.get("/", (req, res) => {
     console.log('메인');
 });
 app.get("/getPostData", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    let postType = "cities";
-    let postID = "Busan3";
+    let postType = "Users";
+    let postID = "육영현";
     let resultData = yield FB.getFBPostData(postType, postID);
-    console.log(resultData);
+    res.send(resultData);
 }));
 app.get("/putDB", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let col = "cities";

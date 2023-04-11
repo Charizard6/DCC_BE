@@ -27,24 +27,24 @@ const app = (0, app_1.initializeApp)(firebaseConfig);
 const db = (0, firestore_1.getFirestore)(app);
 const getFBPostData = (collect, documen) => __awaiter(void 0, void 0, void 0, function* () {
     let resultData = {
-        Country_1: "",
+        email: "",
         name: "",
-        state: ""
+        index: ""
     };
     try {
         const postDocData = yield (0, firestore_1.getDoc)((0, firestore_1.doc)(db, collect, documen));
         if (postDocData.exists()) {
-            resultData.Country_1 = postDocData.data().country;
+            resultData.index = postDocData.data().index;
             resultData.name = postDocData.data().name;
-            resultData.state = postDocData.data().state;
+            resultData.email = postDocData.data().email;
         }
         else {
-            resultData.Country_1 = "없어요";
+            resultData.index = "없어요";
             resultData.name = "없어요";
         }
     }
     catch (error) {
-        resultData.Country_1 = "캣치문";
+        resultData.index = "캣치문";
         resultData.name = "캐치문";
     }
     return resultData;
