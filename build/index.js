@@ -38,13 +38,26 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const FB = __importStar(require("../db/conndb.js"));
 const app = (0, express_1.default)();
+const cors = require('cors');
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));
+app.use(cors({
+    origin: '*',
+    credentials: true,
+    optionsSuccessStatus: 200, // 응답 상태 200으로 설정
+}));
 app.get("/", (req, res) => {
     res.send("/ 노드몬다시보기");
     console.log('메인');
 });
-app.get("/getPostData", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+app.post("/getPostData", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let postType = "Users";
+    let postID = "육영현";
+    let resultData = yield FB.getFBPostData(postType, postID);
+    res.send(resultData);
+    console.log("겟멤");
+}));
+app.get("/getGetData", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let postType = "Users";
     let postID = "육영현";
     let resultData = yield FB.getFBPostData(postType, postID);
@@ -55,6 +68,8 @@ app.get("/putDB", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let docname = "LA";
     yield FB.putDB(col, docname);
 }));
-app.listen(8080, () => {
-    console.log("Server is Listening on Port 8080!");
+app.listen(3000, () => {
+    console.log("Server is Listening on Port 3000!");
+    //haren-dev.defcon.or.kr 도메인은 이 서버의 3000 포트다....
+    //8080포트는 이 VSCode가 돌아가고 있는 포트다...
 });
